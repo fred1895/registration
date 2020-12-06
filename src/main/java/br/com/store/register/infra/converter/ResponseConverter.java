@@ -2,31 +2,39 @@ package br.com.store.register.infra.converter;
 
 import br.com.store.register.domain.converter.Converter;
 import br.com.store.register.domain.entities.Count;
-import br.com.store.register.domain.request.CountRequest;
+import br.com.store.register.domain.response.CountResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ResponseConverter implements Converter<Count, CountRequest> {
+public class ResponseConverter implements Converter<Count, CountResponse> {
     @Override
-    public CountRequest convertToDto(Count count) {
-        return null;
+    public CountResponse convertToDto(Count count) {
+        CountResponse countResponse = new CountResponse();
+        countResponse.setId(count.getId());
+        countResponse.setDaysLate(count.getDaysLate());
+        countResponse.setFixedValue(count.getFixedValue());
+        countResponse.setName(count.getName());
+        countResponse.setOriginalValue(count.getOriginalValue());
+        countResponse.setPayday(count.getPayday());
+
+        return countResponse;
     }
 
     @Override
-    public List<CountRequest> convertListToDto(List<Count> t) {
-        return null;
+    public List<CountResponse> convertListToDto(List<Count> count) {
+        List<CountResponse> countRespons = new ArrayList<>();
+        for (Count c: count) {
+            CountResponse countResponse = convertToDto(c);
+            countRespons.add(countResponse);
+        }
+        return countRespons;
     }
 
     @Override
-    public Count convertToEntity(CountRequest countRequest) {
-        Count count = new Count();
-        count.setName(countRequest.getName());
-        count.setOriginalValue(countRequest.getOriginalValue());
-        count.setDueDate(countRequest.getDueDate());
-        count.setPayday(countRequest.getPayday());
-
-        return count;
+    public Count convertToEntity(CountResponse countResponse) {
+        return null;
     }
 }

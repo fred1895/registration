@@ -2,39 +2,31 @@ package br.com.store.register.infra.converter;
 
 import br.com.store.register.domain.converter.Converter;
 import br.com.store.register.domain.entities.Count;
-import br.com.store.register.domain.response.CountResponse;
+import br.com.store.register.domain.request.CountRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RequestConverter implements Converter<Count, CountResponse> {
+public class RequestConverter implements Converter<Count, CountRequest> {
     @Override
-    public CountResponse convertToDto(Count count) {
-        CountResponse countResponse = new CountResponse();
-        countResponse.setId(count.getId());
-        countResponse.setDaysLate(count.getDaysLate());
-        countResponse.setFixedValue(count.getFixedValue());
-        countResponse.setName(count.getName());
-        countResponse.setOriginalValue(count.getOriginalValue());
-        countResponse.setPayday(count.getPayday());
-
-        return countResponse;
-    }
-
-    @Override
-    public List<CountResponse> convertListToDto(List<Count> count) {
-        List<CountResponse> countResponses = new ArrayList<>();
-        for (Count c: count) {
-            CountResponse countResponse = convertToDto(c);
-            countResponses.add(countResponse);
-        }
-        return countResponses;
-    }
-
-    @Override
-    public Count convertToEntity(CountResponse countResponse) {
+    public CountRequest convertToDto(Count count) {
         return null;
+    }
+
+    @Override
+    public List<CountRequest> convertListToDto(List<Count> t) {
+        return null;
+    }
+
+    @Override
+    public Count convertToEntity(CountRequest countRequest) {
+        Count count = new Count();
+        count.setName(countRequest.getName());
+        count.setOriginalValue(countRequest.getOriginalValue());
+        count.setDueDate(countRequest.getDueDate());
+        count.setPayday(countRequest.getPayday());
+
+        return count;
     }
 }

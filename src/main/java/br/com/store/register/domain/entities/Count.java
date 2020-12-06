@@ -1,26 +1,37 @@
 package br.com.store.register.domain.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@Table(name = "COUNT")
 public class Count implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
+
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "ORIGINAL_VALUE")
     private BigDecimal originalValue;
+
+    @Column(name = "FIXED_VALUE")
     private BigDecimal fixedValue;
+
+    @Column(name = "DUE_DATE")
     private LocalDate dueDate;
+
+    @Column(name = "PAYDAY")
     private LocalDate payday;
+
+    @Column(name = "DAYS_LATE")
     private Integer daysLate;
 
     public Count() {
