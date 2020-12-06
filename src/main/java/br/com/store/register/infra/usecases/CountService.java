@@ -2,6 +2,7 @@ package br.com.store.register.infra.usecases;
 
 import br.com.store.register.domain.entities.Count;
 import br.com.store.register.domain.request.CountRequest;
+import br.com.store.register.domain.response.CountResponse;
 import br.com.store.register.infra.converter.RequestConverter;
 import br.com.store.register.infra.repositories.CountRepository;
 import br.com.store.register.infra.usecases.taxes.OverFiveDays;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class CountService {
@@ -32,6 +34,10 @@ public class CountService {
         BigDecimal fixedValue = getFixedValue(countRequest);
         count.setFixedValue(fixedValue);
         countRepository.save(count);
+    }
+
+    public List<CountResponse> getCounts() {
+        return countRepository.listCounts();
     }
 
     private BigDecimal getFixedValue(CountRequest countRequest) {
